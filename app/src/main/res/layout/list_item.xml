@@ -18,11 +18,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/image"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 tools:src="@tools:sample/avatars"
+                android:background="@drawable/circle"
                 />
 
             <LinearLayout
@@ -41,15 +42,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:layout_weight="0.75"
+                        android:layout_weight="0.80"
                         tools:text="John Doe"
                         />
                     <TextClock
                         android:id="@+id/time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.25"
-                        android:format24Hour="HH:mm a"
+                        android:layout_weight="0.20"
+                        android:format12Hour="hh:mm a"
+                        android:text="00:00"
                         />
 
 
@@ -61,8 +63,10 @@
                 <TextView
                     android:id="@+id/message"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:layout_weight="1"
+                    tools:text="This is a long message. It should be wrapped up"/>
 
             </LinearLayout>
 
