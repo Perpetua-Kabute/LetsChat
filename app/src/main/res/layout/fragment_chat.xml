@@ -51,9 +51,8 @@
 
             <Button
                 android:id="@+id/button_chatbox_send"
-                android:text="SEND"
                 android:textSize="14sp"
-                android:background="?attr/selectableItemBackground"
+                android:background="@drawable/send_button"
                 android:clickable="true"
                 android:layout_width="64dp"
                 android:layout_height="48dp"
