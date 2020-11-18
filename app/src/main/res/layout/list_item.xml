@@ -53,12 +53,7 @@
                         android:format12Hour="hh:mm a"
                         android:text="00:00"
                         />
-
-
-
                 </LinearLayout>
-
-
 
                 <TextView
                     android:id="@+id/message"
