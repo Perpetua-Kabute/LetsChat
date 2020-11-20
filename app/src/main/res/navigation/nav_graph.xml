@@ -12,11 +12,18 @@
         android:label="fragment_messages"
         tools:layout="@layout/fragment_messages" >
         <action
-            android:id="@+id/action_messagesFragment2_to_chatFragment"
-            app:destination="@id/chatFragment" />
+            android:id="@+id/action_messagesFragment2_to_chatFragment2"
+            app:destination="@id/chatFragment2" />
     </fragment>
     <fragment
-        android:id="@+id/chatFragment"
+        android:id="@+id/chatFragment2"
         android:name="com.example.letschat.chat.ChatFragment"
-        android:label="ChatFragment" />
+        android:label="ChatFragment"
+        tools:layout="@layout/fragment_chat"/>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.letschat.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login"/>
+
 </navigation>
