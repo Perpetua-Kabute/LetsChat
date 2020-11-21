@@ -1,0 +1,15 @@
+package com.example.letschat.database
+
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class Device(
+        @PrimaryKey(autoGenerate = true)
+        val deviceId: Int,
+
+        @ColumnInfo(name = "device_name")
+        val deviceName: String?
+
+)
