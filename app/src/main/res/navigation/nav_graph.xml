@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_chat"/>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.letschat.LoginFragment"
+        android:name="com.example.letschat.Login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login"/>
 
