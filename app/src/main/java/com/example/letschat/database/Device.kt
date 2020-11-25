@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "device_table")
 data class Device(
         @PrimaryKey(autoGenerate = true)
-        val deviceId: Int,
+        val deviceId: Int = 0,
 
         @ColumnInfo(name = "device_name")
         val deviceName: String?
