@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.example.letschat.MainActivity
 import com.example.letschat.R
 import com.example.letschat.database.Device
@@ -50,7 +51,8 @@ class LoginFragment : Fragment() {
             }
             val userDevice= Device(deviceName = deviceName)
             databaseDao.insert(userDevice)
-
+            Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_messagesFragment2)
+            
         }
 
         return binding.root
