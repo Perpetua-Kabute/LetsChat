@@ -1,5 +1,6 @@
 package com.example.letschat.Login
 
+import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -7,7 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -17,10 +20,12 @@ import com.example.letschat.database.Device
 import com.example.letschat.database.DeviceDatabaseDao
 import com.example.letschat.database.LetschatDatabase
 import com.example.letschat.databinding.FragmentLoginBinding
+import kotlinx.coroutines.*
 
 
 class LoginFragment : Fragment() {
-    private lateinit var databaseDao: DeviceDatabaseDao
+    private lateinit var dataSource: DeviceDatabaseDao
+    private lateinit var binding: FragmentLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,12 +34,12 @@ class LoginFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val binding: FragmentLoginBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_login,container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login,container, false)
 //        //get the application
         val application = requireNotNull(this.activity).application
-//
+
 //        //reference to datasource
-//        val dataSource = LetschatDatabase.getInstance(application).deviceDatabaseDao
+        dataSource = LetschatDatabase.getInstance(application).deviceDatabaseDao
 //
 //        //get the ViewModelFactory
 //        val viewModelFactory = LoginViewModelFactory(dataSource, application)
@@ -42,20 +47,40 @@ class LoginFragment : Fragment() {
 //        //get viewmodel
 //        val viewModel = ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel::class.java)
 //
-//        binding.setLifecycleOwner(thiss)
-        val deviceName = binding.deviceName.text.toString()
+//        binding.setLifecycleOwner(this)
+
         binding.signIn.setOnClickListener {
-            if(TextUtils.isEmpty(deviceName)){
-                Log.i("LoginFragment", "Device name empty")
-                Toast.makeText(activity, "Enter the name of your device", Toast.LENGTH_SHORT).show()
-            }
-            val userDevice= Device(deviceName = deviceName)
-            databaseDao.insert(userDevice)
-            Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_messagesFragment2)
-            
+            insertUser(it)
         }
 
         return binding.root
+    }
+    fun View.hideKeyboard() {
+        val imm =  getSystemService(context,
+                InputMethodManager::class.java) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+    fun insertUser(view: View){
+        val deviceName = binding.deviceName.text.toString()
+        if(TextUtils.isEmpty(deviceName)){
+            Log.i("LoginFragment", "Device name empty")
+            Toast.makeText(activity, "Enter the name of your device", Toast.LENGTH_SHORT).show()
+        }else {
+            var viewModelJob = Job()
+            val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+
+            uiScope.launch(Dispatchers.IO) {
+                val userDevice = Device(deviceName = deviceName)
+                dataSource.insert(userDevice)
+                Log.i("Login", "called Login")
+
+                withContext(Dispatchers.Main) {
+                    view.hideKeyboard()
+                    Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_messagesFragment2)
+                }
+            }
+        }
     }
 
     //insert a user from edit text
