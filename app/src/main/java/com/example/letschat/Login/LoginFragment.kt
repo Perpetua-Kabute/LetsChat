@@ -50,7 +50,6 @@ class LoginFragment : Fragment() {
             }
             val userDevice= Device(deviceName = deviceName)
             databaseDao.insert(userDevice)
-            
 
         }
 
