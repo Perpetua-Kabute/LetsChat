@@ -29,6 +29,7 @@ class LoginFragment : Fragment() {
     private val viewModelJob = Job()
     private val deviceId = 0L
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -53,7 +54,6 @@ class LoginFragment : Fragment() {
 
         binding.signIn.setOnClickListener {
             insertUser(it)
-
         }
 
         return binding.root
@@ -67,7 +67,7 @@ class LoginFragment : Fragment() {
     //insert a user from edit text
     //on button click I want to check if device name is entered and if true insert device name into Device
 
-    fun insertUser(view: View){
+    private fun insertUser(view: View){
         val deviceName = binding.deviceName.text.toString()
         if(TextUtils.isEmpty(deviceName)){
             Log.i("LoginFragment", "Device name empty")
@@ -81,7 +81,10 @@ class LoginFragment : Fragment() {
                 dataSource.insert(userDevice)
                 Log.i("Login", "called Login")
                 val device = dataSource.getDevice()
+
                 Log.i("Login Fragment", "inserted ${device}")
+
+
 
                 withContext(Dispatchers.Main) {
                     view.hideKeyboard()
@@ -90,9 +93,7 @@ class LoginFragment : Fragment() {
             }
         }
     }
-    fun getUser(){
 
-    }
 
     override fun onDestroy() {
         super.onDestroy()

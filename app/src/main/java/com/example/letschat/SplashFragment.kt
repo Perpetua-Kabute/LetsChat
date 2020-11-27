@@ -17,6 +17,8 @@ import kotlinx.coroutines.*
 
 
 class SplashFragment : Fragment() {
+    private lateinit var fragmentJob: CompletableJob
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,22 +46,27 @@ class SplashFragment : Fragment() {
     }
     fun checkIfSignedIn(){
         val application = requireNotNull(this.activity).application
-        val fragmentJob = Job()
+        fragmentJob = Job()
         val uiScope = CoroutineScope(Dispatchers.Main + fragmentJob)
 
         uiScope.launch(Dispatchers.IO) {
            val dataSource = LetschatDatabase.getInstance(application).deviceDatabaseDao
             val device =dataSource.getDevice()
-            Log.i("Splash Fragment", "inserted ${device}")
+            Log.i("Splash Fragment", "inserted $device")
 
             withContext(Dispatchers.Main) {
-               if( device != null){
-                   findNavController().navigate(R.id.action_splashFragment_to_messagesFragment2)
-                }else{
+               if( device.isNullOrEmpty()){
                    findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                }else{
+                   findNavController().navigate(R.id.action_splashFragment_to_messagesFragment2)
                }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        fragmentJob.cancel()
     }
 
 }
