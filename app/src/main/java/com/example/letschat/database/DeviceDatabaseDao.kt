@@ -14,4 +14,7 @@ interface DeviceDatabaseDao {
     @Query("SELECT device_name FROM device_table WHERE deviceId = :key")
     fun get(key: Long): String
 
+    @Query("SELECT * FROM device_table ")
+    fun getDevice(): List<Device>
+
 }
