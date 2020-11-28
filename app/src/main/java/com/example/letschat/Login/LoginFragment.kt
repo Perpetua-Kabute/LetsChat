@@ -1,6 +1,5 @@
 package com.example.letschat.Login
 
-import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -12,9 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
-import com.example.letschat.MainActivity
 import com.example.letschat.R
 import com.example.letschat.database.Device
 import com.example.letschat.database.DeviceDatabaseDao
@@ -26,7 +23,7 @@ import kotlinx.coroutines.*
 class LoginFragment : Fragment() {
     private lateinit var dataSource: DeviceDatabaseDao
     private lateinit var binding: FragmentLoginBinding
-    private val viewModelJob = Job()
+    private val LoginJob = Job()
     private val deviceId = 0L
 
 
@@ -74,7 +71,7 @@ class LoginFragment : Fragment() {
             Toast.makeText(activity, "Enter the name of your device", Toast.LENGTH_SHORT).show()
         }else {
 
-            val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+            val uiScope = CoroutineScope(Dispatchers.Main + LoginJob)
 
             uiScope.launch(Dispatchers.IO) {
                 val userDevice = Device(deviceName = deviceName)
@@ -97,7 +94,7 @@ class LoginFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModelJob.cancel()
+        LoginJob.cancel()
     }
 
 
