@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "device_table")
+
 data class Device(
         @PrimaryKey(autoGenerate = true)
         val deviceId: Int = 0,

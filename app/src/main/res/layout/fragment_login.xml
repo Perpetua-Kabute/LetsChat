@@ -4,13 +4,12 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login_bc"
         tools:context=".Login.LoginFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="444dp"
-            android:layout_marginTop="140dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/layout_top_margin"
             android:orientation="vertical">
 
             <TextView
@@ -21,22 +20,29 @@
                 android:textSize="50sp"
                 android:textStyle="bold"
                 android:text="@string/hello"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="16dp"/>
-            <EditText
-                android:id="@+id/deviceName"
+                android:layout_marginStart="@dimen/layout_margin_16dp"
+                android:layout_marginEnd="@dimen/layout_margin_16dp"
+                android:layout_marginTop="@dimen/layout_margin_16dp"/>
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:hint="@string/device_name"/>
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/deviceName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/layout_margin_16dp"
+                    android:layout_marginEnd="@dimen/layout_margin_16dp"
+                    android:hint="@string/device_name"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
             <Button
                 android:id="@+id/signIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="Sign in"
+                android:layout_marginStart="@dimen/layout_margin_16dp"
+                android:layout_marginTop="@dimen/layout_margin_16dp"
+                android:text="@string/sign_up"
+                android:layout_gravity=""
                 android:textAllCaps="false"
                 android:background="@drawable/rounded_button"/>
         </LinearLayout>
