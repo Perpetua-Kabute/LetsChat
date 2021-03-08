@@ -3,7 +3,7 @@ package com.example.letschat.Login
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.letschat.database.DeviceDatabaseDao
+import com.example.letschat.repository.DeviceDatabaseDao
 
 class LoginViewModelFactory(
         private val dataSource: DeviceDatabaseDao,

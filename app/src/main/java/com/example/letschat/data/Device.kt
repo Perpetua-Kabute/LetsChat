@@ -1,4 +1,4 @@
-package com.example.letschat.database
+package com.example.letschat.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

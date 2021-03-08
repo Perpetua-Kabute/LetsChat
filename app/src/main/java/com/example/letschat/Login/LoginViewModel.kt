@@ -3,9 +3,8 @@ package com.example.letschat.Login
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.letschat.database.Device
-import com.example.letschat.database.DeviceDatabaseDao
+import com.example.letschat.data.Device
+import com.example.letschat.repository.DeviceDatabaseDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

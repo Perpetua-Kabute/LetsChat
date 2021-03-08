@@ -1,8 +1,9 @@
-package com.example.letschat.database
+package com.example.letschat.repository
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.letschat.data.Device
 
 @Dao
 interface DeviceDatabaseDao {

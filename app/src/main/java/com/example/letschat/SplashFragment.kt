@@ -7,12 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.HandlerCompat.postDelayed
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import com.example.letschat.Login.LoginFragment
-import com.example.letschat.database.Device
-import com.example.letschat.database.LetschatDatabase
+import com.example.letschat.repository.LetschatDatabase
 import kotlinx.coroutines.*
 
 

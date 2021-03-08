@@ -13,9 +13,9 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import com.example.letschat.R
-import com.example.letschat.database.Device
-import com.example.letschat.database.DeviceDatabaseDao
-import com.example.letschat.database.LetschatDatabase
+import com.example.letschat.data.Device
+import com.example.letschat.repository.DeviceDatabaseDao
+import com.example.letschat.repository.LetschatDatabase
 import com.example.letschat.databinding.FragmentLoginBinding
 import kotlinx.coroutines.*
 
