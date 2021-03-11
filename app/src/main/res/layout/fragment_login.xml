@@ -10,7 +10,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/layout_top_margin"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginEnd="@dimen/layout_32dp"
+            android:layout_marginStart="@dimen/layout_32dp">
 
             <TextView
                 android:id="@+id/hello"
@@ -20,8 +22,6 @@
                 android:textSize="50sp"
                 android:textStyle="bold"
                 android:text="@string/hello"
-                android:layout_marginStart="@dimen/layout_margin_16dp"
-                android:layout_marginEnd="@dimen/layout_margin_16dp"
                 android:layout_marginTop="@dimen/layout_margin_16dp"/>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -30,16 +30,13 @@
                     android:id="@+id/deviceName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/layout_margin_16dp"
-                    android:layout_marginEnd="@dimen/layout_margin_16dp"
                     android:hint="@string/device_name"/>
 
             </com.google.android.material.textfield.TextInputLayout>
             <Button
                 android:id="@+id/signIn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/layout_margin_16dp"
                 android:layout_marginTop="@dimen/layout_margin_16dp"
                 android:text="@string/sign_up"
                 android:layout_gravity=""
