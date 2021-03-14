@@ -1,4 +1,4 @@
-package com.example.letschat.data
+package com.example.letschat.data.entities
 
 import androidx.room.Entity
 import kotlinx.serialization.Serializable

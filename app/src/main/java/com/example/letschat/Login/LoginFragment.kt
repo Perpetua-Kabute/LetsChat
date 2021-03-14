@@ -10,12 +10,11 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import com.example.letschat.R
-import com.example.letschat.data.Device
-import com.example.letschat.repository.DeviceDatabaseDao
-import com.example.letschat.repository.LetschatDatabase
+import com.example.letschat.data.entities.Device
+import com.example.letschat.data.dao.DeviceDatabaseDao
+import com.example.letschat.data.LetschatDatabase
 import com.example.letschat.databinding.FragmentLoginBinding
 import kotlinx.coroutines.*
 

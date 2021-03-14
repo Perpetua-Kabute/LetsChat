@@ -3,15 +3,15 @@ package com.example.letschat.Login
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.letschat.data.Device
-import com.example.letschat.repository.DeviceDatabaseDao
+import com.example.letschat.data.entities.Device
+import com.example.letschat.data.dao.DeviceDatabaseDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 
 class LoginViewModel(
-        val deviceDao: DeviceDatabaseDao,
-        application: Application
+    val deviceDao: DeviceDatabaseDao,
+    application: Application
 ): AndroidViewModel(application){
     //insert a user from edit text
 

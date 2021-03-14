@@ -3,11 +3,11 @@ package com.example.letschat.Login
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.letschat.repository.DeviceDatabaseDao
+import com.example.letschat.data.dao.DeviceDatabaseDao
 
 class LoginViewModelFactory(
-        private val dataSource: DeviceDatabaseDao,
-        private val application: Application): ViewModelProvider.Factory{
+    private val dataSource: DeviceDatabaseDao,
+    private val application: Application): ViewModelProvider.Factory{
 
     @Suppress("Unchecked cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
