@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_messagesFragment2_to_chatFragment2"
             app:destination="@id/chatFragment2" />
+        <argument
+            android:name="deviceName"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment2"

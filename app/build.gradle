@@ -2,8 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-
-    id 'androidx.navigation.safeargs'
+    id 'androidx.navigation.safeargs.kotlin'
     id 'kotlinx-serialization'
 }
 
@@ -12,6 +11,7 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
+    flavorDimensions "default"
     defaultConfig {
         applicationId "com.example.letschat"
         minSdkVersion 19
@@ -67,6 +67,7 @@ dependencies {
 
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.4'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.4'
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'

@@ -78,7 +78,9 @@ class LoginFragment : Fragment() {
                         Toast.makeText(context, "Could not sign up", Toast.LENGTH_SHORT).show()
                     }else{
                         Log.i("Devices it= " ,"$it")
-                        findNavController().navigate(R.id.action_loginFragment_to_messagesFragment2)
+                        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMessagesFragment2(
+                            it[0].deviceName.toString()
+                        ))
                     }
                 })
 

@@ -21,9 +21,9 @@ import kotlinx.coroutines.*
 
 
 class SplashFragment : Fragment() {
-    var iFHasNotSignedUP: Boolean = false
+
     private lateinit var deviceRepository: DeviceRepository
-    val viewModel : LoginViewModel by viewModels {
+    private val viewModel : LoginViewModel by viewModels {
         LoginViewModelFactory(deviceRepository)
     }
 
@@ -41,8 +41,6 @@ class SplashFragment : Fragment() {
         Log.i("RepositoryDb splash", "$database")
         deviceRepository =  DeviceRepository(database.deviceDatabaseDao())
         Log.i("Repositoryinstasplas", "${deviceRepository}")
-
-        Log.i("Repository splash", "$deviceRepository")
 
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
@@ -64,16 +62,13 @@ class SplashFragment : Fragment() {
                 if(it.isNullOrEmpty()){
                     findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
                 }else{
-                    findNavController().navigate(R.id.action_splashFragment_to_messagesFragment2)
+                    findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMessagesFragment2(it[0].deviceName.toString()))
                     Log.i("Splash Fragment", "inserted $it")
                 }
 
-
             })
 
-
         }
-
 
     }
 
