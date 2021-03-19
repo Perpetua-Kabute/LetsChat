@@ -1,5 +1,6 @@
 package com.example.letschat.Login
 
+
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -10,12 +11,17 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
-import androidx.navigation.Navigation
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.letschat.R
+import com.example.letschat.data.LetschatDatabase
+
 import com.example.letschat.data.entities.Device
 import com.example.letschat.data.dao.DeviceDatabaseDao
-import com.example.letschat.data.LetschatDatabase
 import com.example.letschat.databinding.FragmentLoginBinding
+import com.example.letschat.repository.DeviceRepository
 import kotlinx.coroutines.*
 
 
@@ -23,7 +29,6 @@ class LoginFragment : Fragment() {
     private lateinit var dataSource: DeviceDatabaseDao
     private  var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-    private val LoginJob = Job()
     private val deviceId = 0L
 
 
@@ -36,21 +41,48 @@ class LoginFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         //get the application
-        val application = requireNotNull(this.activity).application
 
-//        //reference to datasource
-        dataSource = LetschatDatabase.getInstance(application).deviceDatabaseDao
-//
-//        //get the ViewModelFactory
-//        val viewModelFactory = LoginViewModelFactory(dataSource, application)
-//
-//        //get viewmodel
-//        val viewModel = ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel::class.java)
-//
-//        binding.setLifecycleOwner(this)
+        val database =  LetschatDatabase.getInstance(requireContext())
+        Log.i("RepositoryDatabase", "$database")
+        val deviceRepository =  DeviceRepository(database.deviceDatabaseDao())
+        Log.i("Repositoryinsta", "${deviceRepository}")
 
-        binding.signIn.setOnClickListener {
-            insertUser(it)
+        Log.i("Repository", "$deviceRepository")
+
+        //get viewmodel
+        val viewModel : LoginViewModel by viewModels {
+            LoginViewModelFactory(deviceRepository)
+        }
+
+        binding.lifecycleOwner = this
+
+        binding.signIn.setOnClickListener { view ->
+            view.hideKeyboard()
+            val deviceName = binding.deviceName.text.toString()
+            if(TextUtils.isEmpty(deviceName)){
+                val deviceErr = binding.deviceErr
+                deviceErr.error = "Device name missing"
+                deviceErr.requestFocus()
+            }else{
+                val device = Device(deviceName = deviceName)
+                Log.i("Device unInserted = " ,"$device")
+                lifecycleScope.launch {
+                    viewModel.insertDevice(device)
+                }
+
+
+                viewModel.devices
+                Log.i("Devices = " ,"${viewModel.devices.value}")
+                viewModel.devices.observe(viewLifecycleOwner, Observer {
+                    if(it.isNullOrEmpty()){
+                        Toast.makeText(context, "Could not sign up", Toast.LENGTH_SHORT).show()
+                    }else{
+                        Log.i("Devices it= " ,"$it")
+                        findNavController().navigate(R.id.action_loginFragment_to_messagesFragment2)
+                    }
+                })
+
+            }
         }
 
         return binding.root
@@ -61,47 +93,10 @@ class LoginFragment : Fragment() {
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
-    //insert a user from edit text
-    //on button click I want to check if device name is entered and if true insert device name into Device
-
-    private fun insertUser(view: View){
-        val deviceName = binding.deviceName.text.toString()
-        if(TextUtils.isEmpty(deviceName)){
-            Log.i("LoginFragment", "Device name empty")
-            Toast.makeText(activity, "Enter the name of your device", Toast.LENGTH_SHORT).show()
-        }else {
-
-            val uiScope = CoroutineScope(Dispatchers.Main + LoginJob)
-
-            uiScope.launch(Dispatchers.IO) {
-                val userDevice = Device(deviceName = deviceName)
-                dataSource.insert(userDevice)
-                Log.i("Login", "called Login")
-                val device = dataSource.getDevice()
-
-                Log.i("Login Fragment", "inserted ${device}")
-
-
-
-                withContext(Dispatchers.Main) {
-                    view.hideKeyboard()
-                    Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_messagesFragment2)
-                }
-            }
-        }
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        LoginJob.cancel()
-        _binding = null
-    }
-
 
 
 }

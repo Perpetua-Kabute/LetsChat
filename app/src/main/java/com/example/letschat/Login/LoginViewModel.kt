@@ -1,36 +1,29 @@
 package com.example.letschat.Login
 
+
+import com.example.letschat.repository.DeviceRepository
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.*
 import com.example.letschat.data.entities.Device
 import com.example.letschat.data.dao.DeviceDatabaseDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    val deviceDao: DeviceDatabaseDao,
-    application: Application
-): AndroidViewModel(application){
-    //insert a user from edit text
+    private val repository: DeviceRepository
+): ViewModel(){
 
-    //on button click I want to check if device name is entered and if true insert device name into Device
-//    fun insertUSer(deviceName: String){
-//        deviceDao.insert(deviceName)
-//    }
-    //create viewmodeljob and cancel couroutines in oncleared
-    private var viewModelJob = Job()
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
+
+    suspend fun insertDevice(device: Device) {
+        repository.insert(device)
     }
-    //define scope for the coroutine. determines the thread the coroutine should run on and the job
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private var device = MutableLiveData<Device?>()
+    val devices: LiveData<List<Device>> = repository.deviceList.asLiveData()
 
-
-
+    suspend fun getDeviceName(deviceId: Long){
+        repository.getDeviceName(deviceId)
+    }
 }
 

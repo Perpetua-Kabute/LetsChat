@@ -10,7 +10,7 @@ import com.example.letschat.data.entities.Device
 @Database(entities = [Device::class], version= 1, exportSchema = false )
 abstract class LetschatDatabase: RoomDatabase(){
     //declare an abstract value of DeviceDatabaseDao
-    abstract val deviceDatabaseDao: DeviceDatabaseDao
+    abstract fun deviceDatabaseDao(): DeviceDatabaseDao
 
     //declare a companion object
     companion object{
@@ -36,7 +36,7 @@ abstract class LetschatDatabase: RoomDatabase(){
                     instance = Room.databaseBuilder(
                             context.applicationContext,
                             LetschatDatabase::class.java,
-                            "sleep_history_database"
+                            "lets_chat_database"
                     )
                             .fallbackToDestructiveMigration()
                             .build()
