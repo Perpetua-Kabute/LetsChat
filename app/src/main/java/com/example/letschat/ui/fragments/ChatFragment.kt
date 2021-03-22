@@ -1,36 +1,33 @@
-package com.example.letschat.messages
+package com.example.letschat.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import com.example.letschat.R
-import com.example.letschat.databinding.FragmentMessagesBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val DEVICE_NAME = "deviceName"
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [MessagesFragment.newInstance] factory method to
+ * Use the [ChatFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MessagesFragment : Fragment() {
-
-    private var deviceName: String? = null
-
+class ChatFragment : Fragment() {
+    // TODO: Rename and change types of parameters
+    private var param1: String? = null
+    private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            deviceName = it.getString(DEVICE_NAME)
+            param1 = it.getString(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
         }
-
     }
 
     override fun onCreateView(
@@ -38,11 +35,7 @@ class MessagesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding: FragmentMessagesBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_messages,container,false)
-        Log.i("Messages","Fragment view created")
-
-        Toast.makeText(context, "$deviceName", Toast.LENGTH_LONG).show()
-        return binding.root
+        return inflater.inflate(R.layout.fragment_chat, container, false)
     }
 
     companion object {
@@ -50,16 +43,17 @@ class MessagesFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param deviceName Parameter 1.
+         * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment MessagesFragment.
+         * @return A new instance of fragment ChatFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(deviceName: String) =
-            MessagesFragment().apply {
+        fun newInstance(param1: String, param2: String) =
+            ChatFragment().apply {
                 arguments = Bundle().apply {
-                    putString(DEVICE_NAME, deviceName)
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
                 }
             }
     }

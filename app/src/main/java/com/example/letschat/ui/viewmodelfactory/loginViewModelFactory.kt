@@ -1,11 +1,10 @@
-package com.example.letschat.Login
+package com.example.letschat.ui.viewmodelfactory
 
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.letschat.data.dao.DeviceDatabaseDao
 import com.example.letschat.repository.DeviceRepository
+import com.example.letschat.ui.viewmodels.LoginViewModel
 
 class LoginViewModelFactory(
     private val repository: DeviceRepository,

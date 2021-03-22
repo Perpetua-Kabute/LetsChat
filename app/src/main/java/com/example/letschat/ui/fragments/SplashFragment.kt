@@ -1,8 +1,9 @@
-package com.example.letschat
+package com.example.letschat.ui.fragments
 
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,12 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.letschat.Login.LoginViewModel
-import com.example.letschat.Login.LoginViewModelFactory
+import com.example.letschat.ui.viewmodels.LoginViewModel
+import com.example.letschat.ui.viewmodelfactory.LoginViewModelFactory
+import com.example.letschat.R
 import com.example.letschat.data.LetschatDatabase
-import com.example.letschat.data.entities.Device
 import com.example.letschat.repository.DeviceRepository
 import kotlinx.coroutines.*
 
@@ -23,9 +25,8 @@ import kotlinx.coroutines.*
 class SplashFragment : Fragment() {
 
     private lateinit var deviceRepository: DeviceRepository
-    private val viewModel : LoginViewModel by viewModels {
-        LoginViewModelFactory(deviceRepository)
-    }
+    private lateinit var viewModel: LoginViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,12 +43,14 @@ class SplashFragment : Fragment() {
         deviceRepository =  DeviceRepository(database.deviceDatabaseDao())
         Log.i("Repositoryinstasplas", "${deviceRepository}")
 
+       viewModel = ViewModelProvider(this, LoginViewModelFactory(deviceRepository)).get(LoginViewModel::class.java)
+
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
 
     override fun onResume() {
         super.onResume()
-        Handler().postDelayed({
+        Handler(Looper.getMainLooper()).postDelayed({
            checkIfSignedIn(viewModel)
 
         }, 2000)
@@ -62,7 +65,11 @@ class SplashFragment : Fragment() {
                 if(it.isNullOrEmpty()){
                     findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
                 }else{
-                    findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMessagesFragment2(it[0].deviceName.toString()))
+                    findNavController().navigate(
+                        SplashFragmentDirections.actionSplashFragmentToMessagesFragment2(
+                            it[0].deviceName.toString()
+                        )
+                    )
                     Log.i("Splash Fragment", "inserted $it")
                 }
 

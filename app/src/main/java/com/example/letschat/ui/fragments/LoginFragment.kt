@@ -1,4 +1,4 @@
-package com.example.letschat.Login
+package com.example.letschat.ui.fragments
 
 
 import android.os.Bundle
@@ -15,7 +15,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.letschat.R
+import com.example.letschat.ui.viewmodels.LoginViewModel
+import com.example.letschat.ui.viewmodelfactory.LoginViewModelFactory
 import com.example.letschat.data.LetschatDatabase
 
 import com.example.letschat.data.entities.Device
@@ -78,9 +79,11 @@ class LoginFragment : Fragment() {
                         Toast.makeText(context, "Could not sign up", Toast.LENGTH_SHORT).show()
                     }else{
                         Log.i("Devices it= " ,"$it")
-                        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMessagesFragment2(
-                            it[0].deviceName.toString()
-                        ))
+                        findNavController().navigate(
+                            LoginFragmentDirections.actionLoginFragmentToMessagesFragment2(
+                                it[0].deviceName.toString()
+                            )
+                        )
                     }
                 })
 

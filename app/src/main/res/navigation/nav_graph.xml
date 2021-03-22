@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/messagesFragment2"
-        android:name="com.example.letschat.messages.MessagesFragment"
+        android:name="com.example.letschat.ui.fragments.MessagesFragment"
         android:label="fragment_messages"
         tools:layout="@layout/fragment_messages" >
         <action
@@ -20,12 +20,12 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment2"
-        android:name="com.example.letschat.chat.ChatFragment"
+        android:name="com.example.letschat.ui.fragments.ChatFragment"
         android:label="ChatFragment"
         tools:layout="@layout/fragment_chat"/>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.letschat.Login.LoginFragment"
+        android:name="com.example.letschat.ui.fragments.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.letschat.SplashFragment"
+        android:name="com.example.letschat.ui.fragments.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action

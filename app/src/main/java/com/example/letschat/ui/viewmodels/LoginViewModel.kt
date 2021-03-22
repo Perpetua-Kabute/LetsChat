@@ -1,4 +1,4 @@
-package com.example.letschat.Login
+package com.example.letschat.ui.viewmodels
 
 
 import com.example.letschat.repository.DeviceRepository
