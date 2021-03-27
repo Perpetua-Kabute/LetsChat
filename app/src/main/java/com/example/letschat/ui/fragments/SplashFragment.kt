@@ -1,6 +1,7 @@
 package com.example.letschat.ui.fragments
 
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -18,6 +19,7 @@ import com.example.letschat.ui.viewmodels.LoginViewModel
 import com.example.letschat.ui.viewmodelfactory.LoginViewModelFactory
 import com.example.letschat.R
 import com.example.letschat.data.LetschatDatabase
+import com.example.letschat.data.User
 import com.example.letschat.repository.DeviceRepository
 import kotlinx.coroutines.*
 
@@ -51,6 +53,7 @@ class SplashFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         Handler(Looper.getMainLooper()).postDelayed({
+
            checkIfSignedIn(viewModel)
 
         }, 2000)
@@ -65,11 +68,18 @@ class SplashFragment : Fragment() {
                 if(it.isNullOrEmpty()){
                     findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
                 }else{
-                    findNavController().navigate(
-                        SplashFragmentDirections.actionSplashFragmentToMessagesFragment2(
-                            it[0].deviceName.toString()
+                    val myPrefs = activity?.getPreferences(Context.MODE_PRIVATE) ?: return@Observer
+                    val userName = myPrefs.getString(getString(R.string.user_name), null)
+                    if(userName == null){
+                        findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToProfileFragment(it[0].deviceName.toString()))
+                    }else{
+                        findNavController().navigate(
+                                SplashFragmentDirections.actionSplashFragmentToMessagesFragment2(
+                                        it[0].deviceName.toString()
+                                )
                         )
-                    )
+                    }
+
                     Log.i("Splash Fragment", "inserted $it")
                 }
 

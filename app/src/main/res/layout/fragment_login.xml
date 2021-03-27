@@ -37,7 +37,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/layout_margin_16dp"
                 android:text="@string/sign_up"
-                android:layout_gravity=""
                 android:textAllCaps="false"
                 android:background="@drawable/rounded_button"/>
         </LinearLayout>
