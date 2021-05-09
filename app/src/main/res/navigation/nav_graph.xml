@@ -24,16 +24,16 @@
         android:label="ChatFragment"
         tools:layout="@layout/fragment_chat"/>
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.letschat.ui.fragments.LoginFragment"
+        android:id="@+id/signupfragment"
+        android:name="com.example.letschat.ui.fragments.SignUpFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login">
+        tools:layout="@layout/fragment_signup">
         <action
-            android:id="@+id/action_loginFragment_to_messagesFragment2"
+            android:id="@+id/action_signUpFragment_to_messagesFragment2"
             app:destination="@id/messagesFragment2"
             app:popUpTo="@id/nav_graph" />
         <action
-            android:id="@+id/action_loginFragment_to_profileFragment"
+            android:id="@+id/action_signUpFragment_to_profileFragment"
             app:destination="@id/profileFragment"
             app:popUpTo="@id/nav_graph" />
     </fragment>
@@ -47,8 +47,8 @@
             app:destination="@id/messagesFragment2"
             app:popUpTo="@id/nav_graph" />
         <action
-            android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
+            android:id="@+id/action_splashFragment_to_signUpFragment"
+            app:destination="@id/signupfragment"
             app:popUpTo="@id/nav_graph" />
         <action
             android:id="@+id/action_splashFragment_to_profileFragment"

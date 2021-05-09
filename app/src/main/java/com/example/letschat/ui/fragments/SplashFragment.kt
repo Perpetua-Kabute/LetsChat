@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -19,7 +18,6 @@ import com.example.letschat.ui.viewmodels.LoginViewModel
 import com.example.letschat.ui.viewmodelfactory.LoginViewModelFactory
 import com.example.letschat.R
 import com.example.letschat.data.LetschatDatabase
-import com.example.letschat.data.User
 import com.example.letschat.repository.DeviceRepository
 import kotlinx.coroutines.*
 
@@ -66,7 +64,7 @@ class SplashFragment : Fragment() {
 
             vm.devices.observe(viewLifecycleOwner, Observer {
                 if(it.isNullOrEmpty()){
-                    findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                    findNavController().navigate(R.id.action_splashFragment_to_signUpFragment)
                 }else{
                     val myPrefs = activity?.getPreferences(Context.MODE_PRIVATE) ?: return@Observer
                     val userName = myPrefs.getString(getString(R.string.user_name), null)

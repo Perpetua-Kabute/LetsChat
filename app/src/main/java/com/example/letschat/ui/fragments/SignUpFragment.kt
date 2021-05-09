@@ -23,14 +23,14 @@ import com.example.letschat.data.LetschatDatabase
 
 import com.example.letschat.data.entities.Device
 import com.example.letschat.data.dao.DeviceDatabaseDao
-import com.example.letschat.databinding.FragmentLoginBinding
+import com.example.letschat.databinding.FragmentSignupBinding
 import com.example.letschat.repository.DeviceRepository
 import kotlinx.coroutines.*
 
 
-class LoginFragment : Fragment() {
+class SignUpFragment : Fragment() {
     private lateinit var dataSource: DeviceDatabaseDao
-    private  var _binding: FragmentLoginBinding? = null
+    private  var _binding: FragmentSignupBinding?= null
     private val binding get() = _binding!!
     private val deviceId = 0L
 
@@ -42,7 +42,7 @@ class LoginFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        _binding = FragmentSignupBinding.inflate(inflater, container, false)
         //get the application
 
         val database =  LetschatDatabase.getInstance(requireContext())
@@ -84,10 +84,10 @@ class LoginFragment : Fragment() {
                         val myPrefs = activity?.getPreferences(Context.MODE_PRIVATE) ?: return@Observer
                         val userName = myPrefs.getString(getString(R.string.user_name), null)
                         if(userName == null){
-                            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToProfileFragment(it[0].deviceName.toString()))
+                            findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToProfileFragment(it[0].deviceName.toString()))
                         }else {
                             findNavController().navigate(
-                                    LoginFragmentDirections.actionLoginFragmentToMessagesFragment2(
+                                    SignUpFragmentDirections.actionSignUpFragmentToMessagesFragment2(
                                             it[0].deviceName.toString()
                                     )
                             )
