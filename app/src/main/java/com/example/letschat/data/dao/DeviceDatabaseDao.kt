@@ -1,20 +1,23 @@
-package com.example.letschat.database
+package com.example.letschat.data.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.letschat.data.entities.Device
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DeviceDatabaseDao {
     //insert a device name
     @Insert
-    fun insert(device: Device)
+    suspend fun insert(device: Device)
 
     //get device name
     @Query("SELECT device_name FROM device_table WHERE deviceId = :key")
-    fun get(key: Long): String
+    suspend fun get(key: Long): String
 
     @Query("SELECT * FROM device_table ")
-    fun getDevice(): List<Device>
+    fun getDevice(): Flow<List<Device>>
 
 }

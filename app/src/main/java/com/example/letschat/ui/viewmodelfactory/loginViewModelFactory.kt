@@ -1,18 +1,19 @@
-package com.example.letschat.Login
+package com.example.letschat.ui.viewmodelfactory
 
-import android.app.Application
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.letschat.database.DeviceDatabaseDao
+import com.example.letschat.repository.DeviceRepository
+import com.example.letschat.ui.viewmodels.LoginViewModel
 
 class LoginViewModelFactory(
-        private val dataSource: DeviceDatabaseDao,
-        private val application: Application): ViewModelProvider.Factory{
+    private val repository: DeviceRepository,
+    ): ViewModelProvider.Factory{
 
     @Suppress("Unchecked cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(LoginViewModel::class.java)){
-            return LoginViewModel(dataSource, application) as T
+            return LoginViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

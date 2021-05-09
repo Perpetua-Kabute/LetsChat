@@ -8,31 +8,38 @@
 
     <fragment
         android:id="@+id/messagesFragment2"
-        android:name="com.example.letschat.messages.MessagesFragment"
+        android:name="com.example.letschat.ui.fragments.MessagesFragment"
         android:label="fragment_messages"
         tools:layout="@layout/fragment_messages" >
         <action
             android:id="@+id/action_messagesFragment2_to_chatFragment2"
             app:destination="@id/chatFragment2" />
+        <argument
+            android:name="deviceName"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment2"
-        android:name="com.example.letschat.chat.ChatFragment"
+        android:name="com.example.letschat.ui.fragments.ChatFragment"
         android:label="ChatFragment"
         tools:layout="@layout/fragment_chat"/>
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.letschat.Login.LoginFragment"
+        android:id="@+id/signupfragment"
+        android:name="com.example.letschat.ui.fragments.SignUpFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login">
+        tools:layout="@layout/fragment_signup">
         <action
-            android:id="@+id/action_loginFragment_to_messagesFragment2"
+            android:id="@+id/action_signUpFragment_to_messagesFragment2"
             app:destination="@id/messagesFragment2"
+            app:popUpTo="@id/nav_graph" />
+        <action
+            android:id="@+id/action_signUpFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
             app:popUpTo="@id/nav_graph" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.letschat.SplashFragment"
+        android:name="com.example.letschat.ui.fragments.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -40,8 +47,25 @@
             app:destination="@id/messagesFragment2"
             app:popUpTo="@id/nav_graph" />
         <action
-            android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
+            android:id="@+id/action_splashFragment_to_signUpFragment"
+            app:destination="@id/signupfragment"
+            app:popUpTo="@id/nav_graph" />
+        <action
+            android:id="@+id/action_splashFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.letschat.ui.fragments.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" >
+        <argument
+            android:name="device_name"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_profileFragment_to_messagesFragment2"
+            app:destination="@id/messagesFragment2"
             app:popUpTo="@id/nav_graph" />
     </fragment>
 
