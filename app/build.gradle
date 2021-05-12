@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlinx-serialization'
+    id 'com.google.gms.google-services'
 
 }
 
@@ -45,6 +46,7 @@ android {
 dependencies {
     def room_version = "2.2.6"
     def lifecycle_version = "2.3.0"
+
     //lifecycle components
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
@@ -80,4 +82,17 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0-RC")
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:28.0.0')
+
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+
+    // Declare the dependency for the Firebase SDK for Google Analytics
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    // Declare the dependencies for any other desired Firebase products
+    // For example, declare the dependencies for Firebase Authentication and Cloud Firestore
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
 }
