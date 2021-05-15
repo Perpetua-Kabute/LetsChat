@@ -24,8 +24,8 @@ import kotlinx.coroutines.*
 
 class SplashFragment : Fragment() {
 
-    private lateinit var deviceRepository: DeviceRepository
-    private lateinit var viewModel: LoginViewModel
+//    private lateinit var deviceRepository: DeviceRepository
+//    private lateinit var viewModel: LoginViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,12 +38,12 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val database =  LetschatDatabase.getInstance(requireContext())
-        Log.i("RepositoryDb splash", "$database")
-        deviceRepository =  DeviceRepository(database.deviceDatabaseDao())
-        Log.i("Repositoryinstasplas", "${deviceRepository}")
-
-       viewModel = ViewModelProvider(this, LoginViewModelFactory(deviceRepository)).get(LoginViewModel::class.java)
+//        val database =  LetschatDatabase.getInstance(requireContext())
+//        Log.i("RepositoryDb splash", "$database")
+//        deviceRepository =  DeviceRepository(database.deviceDatabaseDao())
+//        Log.i("Repositoryinstasplas", "${deviceRepository}")
+//
+//       viewModel = ViewModelProvider(this, LoginViewModelFactory(deviceRepository)).get(LoginViewModel::class.java)
 
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
@@ -51,8 +51,8 @@ class SplashFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         Handler(Looper.getMainLooper()).postDelayed({
-
-           checkIfSignedIn(viewModel)
+            findNavController().navigate(R.id.action_splashFragment_to_signUpFragment)
+//           checkIfSignedIn(viewModel)
 
         }, 2000)
         Log.i("SplashFragment", "onResume called")
