@@ -21,18 +21,18 @@
                 android:src="@drawable/logo"
                 />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/user_name_entry"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:startIconDrawable="@drawable/ic_stat_name">
-                <EditText
-                    android:id="@+id/user_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="User name"/>
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/user_name_entry"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:startIconDrawable="@drawable/ic_stat_name">-->
+<!--                <EditText-->
+<!--                    android:id="@+id/user_name"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:hint="User name"/>-->
 
-            </com.google.android.material.textfield.TextInputLayout>
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/phone_number_entry"
                 android:layout_width="match_parent"
@@ -48,12 +48,16 @@
             </com.google.android.material.textfield.TextInputLayout>
             <Button
                 android:id="@+id/signIn"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+
                 android:layout_marginTop="@dimen/layout_margin_16dp"
-                android:text="@string/sign_up"
+                android:text="Next"
                 android:textAllCaps="false"
                 android:background="@drawable/rounded_button"/>
+
+
         </LinearLayout>
 
     </FrameLayout>

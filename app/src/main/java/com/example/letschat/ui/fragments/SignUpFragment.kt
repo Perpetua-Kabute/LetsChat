@@ -45,18 +45,6 @@ class SignUpFragment : Fragment() {
         _binding = FragmentSignupBinding.inflate(inflater, container, false)
         //get the application
 
-        val database =  LetschatDatabase.getInstance(requireContext())
-        Log.i("RepositoryDatabase", "$database")
-        val deviceRepository =  DeviceRepository(database.deviceDatabaseDao())
-        Log.i("Repositoryinsta", "${deviceRepository}")
-
-        Log.i("Repository", "$deviceRepository")
-
-        //get viewmodel
-        val viewModel : LoginViewModel by viewModels {
-            LoginViewModelFactory(deviceRepository)
-        }
-
         binding.lifecycleOwner = this
 
         binding.signIn.setOnClickListener { view ->
@@ -64,11 +52,7 @@ class SignUpFragment : Fragment() {
             val userName = binding.userName.text.toString()
             val phoneNumber = binding.phoneNumber.text.toString()
             if(TextUtils.isEmpty(userName) || TextUtils.isEmpty(phoneNumber)){
-                if(TextUtils.isEmpty(userName)){
-                    val noUserNameErr = binding.userNameEntry
-                    noUserNameErr.error = "User name missing"
-                    noUserNameErr.requestFocus()
-                }
+
                 if(TextUtils.isEmpty(phoneNumber)){
                     val noPhoneNumberErr = binding.phoneNumberEntry
                     noPhoneNumberErr.error = "Phone number missing"
@@ -80,38 +64,15 @@ class SignUpFragment : Fragment() {
                         userName
                     )
                 )
-//                val device = Device(deviceName = deviceName)
-//                Log.i("Device unInserted = " ,"$device")
-//                lifecycleScope.launch {
-//                    viewModel.insertDevice(device)
-//                }
-//
-//
-//                viewModel.devices
-//                Log.i("Devices = " ,"${viewModel.devices.value}")
-//                viewModel.devices.observe(viewLifecycleOwner, Observer {
-//                    if(it.isNullOrEmpty()){
-//                        Toast.makeText(context, "Could not sign up", Toast.LENGTH_SHORT).show()
-//                    }else{
-//                        Log.i("Devices it= " ,"$it")
-//                        val myPrefs = activity?.getPreferences(Context.MODE_PRIVATE) ?: return@Observer
-//                        val userName = myPrefs.getString(getString(R.string.user_name), null)
-//                        if(userName == null){
-//                            findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToProfileFragment(it[0].deviceName.toString()))
-//                        }else {
-//                            findNavController().navigate(
-//                                    SignUpFragmentDirections.actionSignUpFragmentToMessagesFragment2(
-//                                            it[0].deviceName.toString()
-//                                    )
-//                            )
-//                        }
-//                    }
-//                })
 
             }
         }
 
         return binding.root
+    }
+
+    fun authWithPhone(){
+
     }
     fun View.hideKeyboard() {
         val imm =  getSystemService(context,
